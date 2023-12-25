@@ -25,11 +25,9 @@ func AddAddress() gin.HandlerFunc {
 		address, err := primitive.ObjectIDFromHex(user_id)
 		if err != nil {
 			c.IndentedJSON(500, "internal server error")
-			return
 		}
 		var addresses models.Address
-
-		addresses.Address_id = primitive.NewObjectID()
+		addresses.Address_ID = primitive.NewObjectID()
 
 		if err = c.BindJSON(&addresses); err != nil {
 			c.IndentedJSON(http.StatusNotAcceptable, err.Error())
@@ -37,7 +35,7 @@ func AddAddress() gin.HandlerFunc {
 		}
 
 		var ctx, cancel = context.WithTimeout(context.Background(), 100*time.Second)
-		match_filter := bson.D{{Key: "match", Value: bson.D{primtive.E{Key: "_id", Value: address}}}}
+		match_filter := bson.D{{Key: "match", Value: bson.D{primitive.E{Key: "_id", Value: address}}}}
 		unwind := bson.D{{Key: "$unwind", Value: bson.D{primitive.E{Key: "path", Value: "$address"}}}}
 		group := bson.D{{Key: "$group", Value: bson.D{primitive.E{Key: "_id", Value: "$address_id"}, {Key: "count", Value: bson.D{primitive.E{Key: "$sum", Value: 1}}}}}}
 

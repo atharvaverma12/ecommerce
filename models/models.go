@@ -30,7 +30,7 @@ type Product struct {
 	Image *string `json:"image"`
 } 
 
-type ProductUser strut{
+type ProductUser struct{
 	Product_ID primitive.ObjectID `bson:"_id"`
 	Product_Name *string `json:"product_name" bson:"product_name"`
 	Price int `json:"price" bson:"price"`
@@ -39,7 +39,7 @@ type ProductUser strut{
 }
 
 type Address struct {=
-	Address_ID primtive.ObjectID `bson:"_ID"`
+	Address_ID primtive.ObjectID `bson:"_id"`
 	House *string `json:"house_name" bson:"house_name"`
 	Street *string `json:"street_name" bson:"street_name"`
 	City *string `json:"city_name" bson:"city_name"`
